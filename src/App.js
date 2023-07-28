@@ -18,16 +18,9 @@ function App() {
         </div>
       </section>
       <section className="listings">
-        <div className="sort">
-          <Sort />
-        </div>
-        
-        <div className="product-list">
-          <div className="products">
-            {/* render ProductList Component, passing 'products' as prop */}
-            <ProductList products={products} />
-          </div>
-        </div>
+        <Sort />
+        {/* render ProductList Component, passing 'products' as prop */}
+        <ProductList products={products} />
       </section>
     </div>
   );
