@@ -14,11 +14,13 @@ function ProductList({ products }) {
             <img
               src={product.image.url}
               alt={product.image.attributes.imageAltText}
+              className="product-img"
             />
             <div className="product-card">
               <img
                 src={product.brand.brandImage.url}
                 alt={product.brand.brandImage.attributes.imageAltText}
+                
               />
               <p>{product.productName}</p>
               <p className="price">£{product.price.priceIncTax}</p>
