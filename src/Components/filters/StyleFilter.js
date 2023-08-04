@@ -1,22 +1,22 @@
 import React from 'react';
-import "../App.css";
+import "./filters.css";
 
-function TypeFilter() {
+function StyleFilter() {
   return (
     <div className='filter'>
-      <h3>Type</h3>
+      <h3>Style</h3>
       <label>
         <input type="checkbox" />
-        Floor Standing
+        Traditional
       </label>
       <br></br>
       <label>
         <input type="checkbox" />
-        Wall Hung
+        Modern
       </label>
       <br></br>
     </div>
   )
 }
 
-export default TypeFilter
+export default StyleFilter

@@ -1,5 +1,5 @@
 import React from "react";
-import "../App.css";
+import "./filters.css";
 
 function PriceFilter() {
   return (

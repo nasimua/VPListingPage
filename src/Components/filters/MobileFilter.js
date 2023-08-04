@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import "../App.css";
+import "./filters.css";
 import Filters from "./Filters";
 import Sort from "./Sort";
 import Hamburger from "hamburger-react";

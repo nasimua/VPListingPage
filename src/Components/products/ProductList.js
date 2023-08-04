@@ -1,5 +1,5 @@
 import React from "react";
-import "../App.css";
+import "./productList.css";
 
 // create functional component that takes a prop 'products', which is an array containing product data
 function ProductList({ products }) {

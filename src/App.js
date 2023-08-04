@@ -1,14 +1,19 @@
 import React from "react";
 import "./App.css";
+import "./Components/filters/filters.css";
 import data from "./example-payload.json";
-import ProductList from "./Components/ProductList";
-import Filters from "./Components/Filters";
-import Sort from "./Components/Sort";
-import MobileFilter from "./Components/MobileFilter";
+import ProductList from "./Components/products/ProductList";
+import Filters from "./Components/filters/Filters";
+import Sort from "./Components/filters/Sort";
+import MobileFilter from "./Components/filters/MobileFilter";
 
 function App() {
   // destructure products array from JSON data
+  // static data
   const { products } = data.item;
+
+
+  
 
   return (
     <div className="App">

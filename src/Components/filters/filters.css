@@ -1,0 +1,84 @@
+.filters {
+  background-color: #fff;
+  padding: 10px 10px;
+}
+.filter-by {
+  margin: 20px 5px;
+}
+
+.reg-sort {
+  margin: 10px 0;
+}
+.reg-sort select {
+  padding: 15px 15px;
+  background-color: #fff;
+  border: none;
+  width: 248px;
+}
+
+.filter {
+  line-height: 30px;
+}
+.filter h3 {
+  margin-bottom: 5px;
+}
+
+.mobile-filter {
+  display: none;
+}
+
+@media only screen and (max-width: 750px) {
+  .reg-filters,
+  .reg-sort {
+    display: none;
+  }
+
+  .mobile-filter {
+    display: flex;
+  }
+  .sort-filter-strip {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #fff;
+    padding: 0 10px;
+    width: 100%;
+  }
+  .m-filter-btn,
+  .m-sort-dropdown {
+    width: 100%;
+  }
+  .m-filter-btn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-right: 2px solid #dedede;
+  }
+  select {
+    padding: 15px 15px;
+    background-color: #fff;
+    border: none;
+    width: 100%;
+  }
+  .filters {
+    position: fixed;
+    width: 50%;
+    left: -100%;
+    transition: all 0.3s;
+  }
+  .active {
+    position: fixed;
+    width: 50%;
+    left: 0%;
+    transition: all 0.3s;
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  .filters {
+    width: 230px;
+  }
+  .mobile-filter h3 {
+    font-size: 14px;
+  }
+}
