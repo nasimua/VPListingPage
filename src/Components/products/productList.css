@@ -8,6 +8,9 @@
   margin: 20px 0;
   background-color: #fff;
 } */
+.product-img {
+  width: 270px;
+}
 .product-card {
   padding: 5px 10px;
 }

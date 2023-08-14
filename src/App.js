@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // import "./App.css";
 import styled from "styled-components";
 import "./Components/filters/filters.css";
-import data from "./example-payload.json";
+// import data from "./example-payload.json";
 import ProductList from "./Components/products/ProductList";
 import Filters from "./Components/filters/Filters";
 import Sort from "./Components/filters/Sort";
@@ -37,7 +37,6 @@ import MobileFilter from "./Components/filters/MobileFilter";
 //   );
 // }
 
-
 const AppContainer = styled.div`
   margin: 0 auto;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -60,16 +59,50 @@ const AppContainer = styled.div`
 
 const LeftSection = styled.section`
   margin: 20px 5px;
-`
+`;
 
 const RightSection = styled.section`
   margin: 20px 5px;
-`
+`;
 
 function App() {
   // destructure products array from JSON data
   // static data
-  const { products } = data.item;
+  // const { products } = data.item;
+
+  // fteching data from a POST endpoint API
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        "https://spanishinquisition.victorianplumbing.co.uk/interviews/listings?apikey=yj2bV48J40KsBpIMLvrZZ1j1KwxN4u3A83H8IBvI",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            query: "toilets",
+            pageNumber: 0,
+            size: 0,
+            additionalPages: 0,
+            sort: 1,
+          }),
+        }
+      );
+
+      const data = await response.json();
+      console.log(data.products)
+      setProducts(data.products);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   return (
     <AppContainer>
