@@ -3,6 +3,15 @@ import "./filters.css";
 import Filters from "./Filters";
 import Sort from "./Sort";
 import Hamburger from "hamburger-react";
+import { styled } from "styled-components";
+
+const MobileFilterSort = styled.div`
+    display: none;
+
+    @media only screen and (max-width: 750px) {
+      display: flex;
+    }
+`
 
 function MobileFilter() {
   const [showFilters, setShowFilters] = useState(false);
@@ -27,7 +36,7 @@ function MobileFilter() {
   }, []);
 
   return (
-    <div ref={menuRef} className="mobile-filter">
+    <MobileFilterSort ref={menuRef} className="mobile-filter">
       <div className="sort-filter-strip">
         <div className="m-filter-btn">
           <h3>Filter By</h3>
@@ -41,7 +50,7 @@ function MobileFilter() {
       <div className={`filters ${showFilters ? "active" : ""}`}>
         <Filters />
       </div>
-    </div>
+    </MobileFilterSort>
   );
 }
 
