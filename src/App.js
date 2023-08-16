@@ -86,51 +86,75 @@ function App() {
   const [products, setProducts] = useState([]);
   const [sortOption, setSortOption] = useState(1);
 
-  useEffect(() => {
-    fetchData();
-  }, [sortOption, setSortOption]);
-
   const handleSortChange = (selectedOption) => {
     setSortOption(selectedOption);
   };
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch(
-        "https://spanishinquisition.victorianplumbing.co.uk/interviews/listings?apikey=yj2bV48J40KsBpIMLvrZZ1j1KwxN4u3A83H8IBvI",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            query: "toilets",
-            pageNumber: 0,
-            size: 0,
-            additionalPages: 0,
-            sort: sortOption,
-          }),
-        }
-      );
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       "https://spanishinquisition.victorianplumbing.co.uk/interviews/listings?apikey=yj2bV48J40KsBpIMLvrZZ1j1KwxN4u3A83H8IBvI",
+  //       {
+  //         method: "POST",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //         body: JSON.stringify({
+  //           query: "toilets",
+  //           pageNumber: 0,
+  //           size: 0,
+  //           additionalPages: 0,
+  //           sort: sortOption,
+  //         }),
+  //       }
+  //     );
 
-      const data = await response.json();
-      console.log(data.products);
-      setProducts(data.products);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-    }
-  };
+  //     const data = await response.json();
+  //     console.log(data.products);
+  //     setProducts(data.products);
+  //   } catch (error) {
+  //     console.error("Error fetching data:", error);
+  //   }
+  // };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "https://spanishinquisition.victorianplumbing.co.uk/interviews/listings?apikey=yj2bV48J40KsBpIMLvrZZ1j1KwxN4u3A83H8IBvI",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              query: "toilets",
+              pageNumber: 0,
+              size: 0,
+              additionalPages: 0,
+              sort: sortOption,
+            }),
+          }
+        );
+
+        const data = await response.json();
+        console.log(data.products);
+        setProducts(data.products);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
+  }, [sortOption]);
 
   return (
     <AppContainer>
-
-      
-
       <LeftSection>
-      <MobileFilterSection>
-        <MobileFilter />
-        <Sort onSortChange={handleSortChange} />
-      </MobileFilterSection>
+        <MobileFilterSection>
+          <MobileFilter />
+          <Sort onSortChange={handleSortChange} />
+        </MobileFilterSection>
         <div className="reg-filters">
           <h2>Filter By</h2>
           <div className="filters">
