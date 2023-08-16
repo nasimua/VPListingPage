@@ -36,21 +36,10 @@
   /* .mobile-filter {
     display: flex;
   } */
-  .sort-filter-strip {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    background-color: #fff;
-    padding: 0 10px;
-    width: 100%;
-  }
-  .m-filter-btn,
-  .m-sort-dropdown {
-    width: 100%;
-  }
+  
+  
   .m-filter-btn {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     border-right: 2px solid #dedede;
   }

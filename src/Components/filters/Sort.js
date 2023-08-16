@@ -1,13 +1,18 @@
 import React from "react";
 
-function Sort() {
+function Sort({onSortChange}) {
+  const handleSortChange = (e) => {
+    const selectSortOption = e.target.value;
+    console.log(selectSortOption)
+    onSortChange(selectSortOption)
+  }
   return (
     <div className="sort">
-        <select>
-          <option>Recommended</option>
-          <option>Lowest Price</option>
-          <option>Highest Price</option>
-          <option>Highest discount</option>
+        <select onChange={handleSortChange}>
+          <option value={1}>Recommended</option>
+          <option value={2}>Lowest Price</option>
+          <option value={3}>Highest Price</option>
+          <option value={4}>Highest discount</option>
         </select>
     </div>
   );

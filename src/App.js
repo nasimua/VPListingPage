@@ -65,6 +65,18 @@ const RightSection = styled.section`
   margin: 20px 5px;
 `;
 
+const MobileFilterSection = styled.div`
+  display: none;
+
+  @media only screen and (max-width: 750px) {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+  }
+`;
+
 function App() {
   // destructure products array from JSON data
   // static data
@@ -72,10 +84,15 @@ function App() {
 
   // fteching data from a POST endpoint API
   const [products, setProducts] = useState([]);
+  const [sortOption, setSortOption] = useState(1);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [sortOption, setSortOption]);
+
+  const handleSortChange = (selectedOption) => {
+    setSortOption(selectedOption);
+  };
 
   const fetchData = async () => {
     try {
@@ -91,13 +108,13 @@ function App() {
             pageNumber: 0,
             size: 0,
             additionalPages: 0,
-            sort: 1,
+            sort: sortOption,
           }),
         }
       );
 
       const data = await response.json();
-      console.log(data.products)
+      console.log(data.products);
       setProducts(data.products);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -106,19 +123,25 @@ function App() {
 
   return (
     <AppContainer>
+
+      
+
       <LeftSection>
+      <MobileFilterSection>
+        <MobileFilter />
+        <Sort onSortChange={handleSortChange} />
+      </MobileFilterSection>
         <div className="reg-filters">
           <h2>Filter By</h2>
           <div className="filters">
             <Filters />
           </div>
         </div>
-        <MobileFilter />
       </LeftSection>
 
       <RightSection>
         <div className="reg-sort">
-          <Sort />
+          <Sort onSortChange={handleSortChange} />
         </div>
 
         {/* render ProductList Component, passing 'products' as prop */}
