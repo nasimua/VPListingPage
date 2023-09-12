@@ -81,6 +81,8 @@ function App() {
   const [products, setProducts] = useState([]);
   const [sortOption, setSortOption] = useState(1);
   const [pageNum, setPageNum] = useState(1);
+  const [gte, setGte] = useState();
+  const [lte, setLte] = useState();
 
   const handleSortChange = (selectedOption) => {
     setSortOption(selectedOption);
@@ -111,6 +113,20 @@ function App() {
               size: 0,
               additionalPages: 0,
               sort: sortOption,
+              facets: {
+                prices: [{
+                      // identifier: "3D-02-FC-D0-B1-8F-65-51",
+                      value: {
+                        gte: gte,
+                        lte: lte
+                      }
+                }],
+                toiletStyle: [{
+                      identifier: "1A-0D-8E-F5-02-80-29-13",
+                      value: ""
+                }]
+            }
+          
             }),
           }
         );
@@ -124,7 +140,7 @@ function App() {
     };
 
     fetchData();
-  }, [sortOption, pageNum]);
+  }, [sortOption, pageNum, gte, lte]);
 
   return (
     <AppContainer>
@@ -136,7 +152,7 @@ function App() {
         <div className="reg-filters">
           <h2>Filter By</h2>
           <div className="filters">
-            <Filters />
+            <Filters gte={gte} lte={lte} setGte={setGte} setLte={setLte}/>
           </div>
         </div>
       </LeftSection>
