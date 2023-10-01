@@ -62,15 +62,13 @@ const PageButton = styled.button`
   border: 1px solid #fff;
   font-size: 16px;
   cursor: pointer;
-  transition: .2s;
+  transition: 0.2s;
 
   &:hover {
     border: 1px solid black;
-    transition: .2s;
+    transition: 0.2s;
   }
-`
-
-
+`;
 
 function App() {
   // destructure products array from JSON data
@@ -81,8 +79,19 @@ function App() {
   const [products, setProducts] = useState([]);
   const [sortOption, setSortOption] = useState(1);
   const [pageNum, setPageNum] = useState(1);
-  const [gte, setGte] = useState();
-  const [lte, setLte] = useState();
+  const [priceFilter, setPriceFilter] = useState([
+    {
+      value: {
+        gte: null,
+        lte: null,
+      },
+    },
+  ]);
+  const [styleFilter, setStyleFilter] = useState([
+    {
+      value: ''
+    }
+  ])
 
   const handleSortChange = (selectedOption) => {
     setSortOption(selectedOption);
@@ -96,6 +105,53 @@ function App() {
       setPageNum(pageNum - 1);
     }
   };
+
+  const handlePriceFilterChange = (filterObject) => {
+    // Check if the filter object is already in the priceFilter array
+    const isFilterInArray = priceFilter.some(
+      (filter) =>
+        filter.value.gte === filterObject.value.gte &&
+        filter.value.lte === filterObject.value.lte
+    );
+  
+    if (isFilterInArray) {
+      // If the object is already in the array, remove it
+      const newPriceFilter = priceFilter.filter(
+        (filter) =>
+          filter.value.gte !== filterObject.value.gte ||
+          filter.value.lte !== filterObject.value.lte
+      );
+      setPriceFilter(newPriceFilter);
+    } else {
+      // If the object is not in the array, add it
+      setPriceFilter([...priceFilter, filterObject]);
+    }
+
+    console.log(priceFilter)
+  };
+
+  const handleStyleFilterChange = (filterObject) => {
+    // Check if the filter object is already in the priceFilter array
+    const isFilterInArray = styleFilter.some(
+      (filter) =>
+        filter.value === filterObject.value
+    );
+  
+    if (isFilterInArray) {
+      // If the object is already in the array, remove it
+      const newStyleFilter = styleFilter.filter(
+        (filter) =>
+          filter.value !== filterObject.value
+      );
+      setStyleFilter(newStyleFilter);
+    } else {
+      // If the object is not in the array, add it
+      setStyleFilter([...styleFilter, filterObject]);
+    }
+
+    console.log(styleFilter)
+  };
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -114,19 +170,9 @@ function App() {
               additionalPages: 0,
               sort: sortOption,
               facets: {
-                prices: [{
-                      // identifier: "3D-02-FC-D0-B1-8F-65-51",
-                      value: {
-                        gte: gte,
-                        lte: lte
-                      }
-                }],
-                toiletStyle: [{
-                      identifier: "1A-0D-8E-F5-02-80-29-13",
-                      value: ""
-                }]
-            }
-          
+                prices: priceFilter,
+                toiletStyle: styleFilter 
+              },
             }),
           }
         );
@@ -140,7 +186,7 @@ function App() {
     };
 
     fetchData();
-  }, [sortOption, pageNum, gte, lte]);
+  }, [sortOption, pageNum, priceFilter, styleFilter]);
 
   return (
     <AppContainer>
@@ -152,7 +198,7 @@ function App() {
         <div className="reg-filters">
           <h2>Filter By</h2>
           <div className="filters">
-            <Filters gte={gte} lte={lte} setGte={setGte} setLte={setLte}/>
+            <Filters onPriceFilterChange={handlePriceFilterChange} onStyleFilterChange={handleStyleFilterChange}/>
           </div>
         </div>
       </LeftSection>
@@ -165,7 +211,11 @@ function App() {
         {/* render ProductList Component, passing 'products' as prop */}
         <ProductList products={products} />
         <Pagination className="pagination">
-          <PageButton className="prev" onClick={handlePagePrev} disabled={pageNum === 1}>
+          <PageButton
+            className="prev"
+            onClick={handlePagePrev}
+            disabled={pageNum === 1}
+          >
             Prev
           </PageButton>
           <div>{pageNum}</div>
