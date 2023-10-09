@@ -1,74 +1,20 @@
 import React, { useState, useEffect } from "react";
 // import "./App.css";
-import styled from "styled-components";
+// import styled from "styled-components";
 import "./Components/filters/filters.css";
 // import data from "./example-payload.json";
 import ProductList from "./Components/products/ProductList";
 import Filters from "./Components/filters/Filters";
 import Sort from "./Components/filters/Sort";
 import MobileFilter from "./Components/filters/MobileFilter";
-
-const AppContainer = styled.div`
-  margin: 0 auto;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  gap: 15px;
-
-  @media only screen and (max-width: 1070px) {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 10px;
-  }
-
-  @media only screen and (max-width: 750px) {
-    display: flex;
-    flex-direction: column;
-  }
-`;
-
-const LeftSection = styled.section`
-  margin: 20px 5px;
-`;
-
-const RightSection = styled.section`
-  margin: 20px 5px;
-`;
-
-const MobileFilterSection = styled.div`
-  display: none;
-
-  @media only screen and (max-width: 750px) {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #fff;
-  }
-`;
-
-const Pagination = styled.div`
-  display: flex;
-  margin: 0 auto;
-  width: 40%;
-  align-items: center;
-  justify-content: space-around;
-`;
-
-const PageButton = styled.button`
-  background-color: #fff;
-  padding: 15px 30px;
-  border: 1px solid #fff;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.2s;
-
-  &:hover {
-    border: 1px solid black;
-    transition: 0.2s;
-  }
-`;
+import {
+  AppContainer,
+  LeftSection,
+  RightSection,
+  MobileFilterSection,
+  Pagination,
+  PageButton,
+} from "./App.styles";
 
 function App() {
   // destructure products array from JSON data
@@ -89,9 +35,9 @@ function App() {
   ]);
   const [styleFilter, setStyleFilter] = useState([
     {
-      value: ''
-    }
-  ])
+      value: "",
+    },
+  ]);
 
   const handleSortChange = (selectedOption) => {
     setSortOption(selectedOption);
@@ -113,7 +59,7 @@ function App() {
         filter.value.gte === filterObject.value.gte &&
         filter.value.lte === filterObject.value.lte
     );
-  
+
     if (isFilterInArray) {
       // If the object is already in the array, remove it
       const newPriceFilter = priceFilter.filter(
@@ -127,21 +73,19 @@ function App() {
       setPriceFilter([...priceFilter, filterObject]);
     }
 
-    console.log(priceFilter, filterObject)
+    console.log(priceFilter, filterObject);
   };
 
   const handleStyleFilterChange = (filterObject) => {
     // Check if the filter object is already in the priceFilter array
     const isFilterInArray = styleFilter.some(
-      (filter) =>
-        filter.value === filterObject.value
+      (filter) => filter.value === filterObject.value
     );
-  
+
     if (isFilterInArray) {
       // If the object is already in the array, remove it
       const newStyleFilter = styleFilter.filter(
-        (filter) =>
-          filter.value !== filterObject.value
+        (filter) => filter.value !== filterObject.value
       );
       setStyleFilter(newStyleFilter);
     } else {
@@ -149,9 +93,8 @@ function App() {
       setStyleFilter([...styleFilter, filterObject]);
     }
 
-    console.log(styleFilter)
+    console.log(styleFilter);
   };
-  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -171,7 +114,7 @@ function App() {
               sort: sortOption,
               facets: {
                 prices: priceFilter,
-                toiletStyle: styleFilter
+                toiletStyle: styleFilter,
               },
             }),
           }
@@ -192,13 +135,19 @@ function App() {
     <AppContainer>
       <LeftSection>
         <MobileFilterSection>
-          <MobileFilter onPriceFilterChange={handlePriceFilterChange} onStyleFilterChange={handleStyleFilterChange}/>
+          <MobileFilter
+            onPriceFilterChange={handlePriceFilterChange}
+            onStyleFilterChange={handleStyleFilterChange}
+          />
           <Sort onSortChange={handleSortChange} />
         </MobileFilterSection>
         <div className="reg-filters">
           <h2>Filter By</h2>
           <div className="filters">
-            <Filters onPriceFilterChange={handlePriceFilterChange} onStyleFilterChange={handleStyleFilterChange}/>
+            <Filters
+              onPriceFilterChange={handlePriceFilterChange}
+              onStyleFilterChange={handleStyleFilterChange}
+            />
           </div>
         </div>
       </LeftSection>
