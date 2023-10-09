@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./filters.css";
-import Filters from "./Filters";
+import PriceFilter from "./PriceFilter";
+import StyleFilter from "./StyleFilter";
+import TypeFilter from "./TypeFilter";
 import Hamburger from "hamburger-react";
 import { styled } from "styled-components";
 
@@ -8,10 +10,9 @@ const BurgerFilter = styled.div`
   display: flex;
 `;
 
-function MobileFilter() {
+function MobileFilter({ onPriceFilterChange, onStyleFilterChange }) {
   const [showFilters, setShowFilters] = useState(false);
   const menuRef = useRef();
-  
 
   const handleBurgerClick = () => {
     setShowFilters((prevShowFilters) => !prevShowFilters);
@@ -31,14 +32,36 @@ function MobileFilter() {
     };
   }, []);
 
+  const handlePriceFilterChange = (low, high, isChecked) => {
+    console.log("Price filter changed:", low, high, isChecked);
+    const filterObject = {
+      value: {
+        gte: low,
+        lte: high,
+      },
+    };
+
+    onPriceFilterChange(filterObject);
+  };
+
+  const handleStyleFilterChange = (style, isChecked) => {
+    const filterObject = {
+      value: style,
+    };
+
+    onStyleFilterChange(filterObject);
+  };
+
   return (
     <BurgerFilter ref={menuRef} className="mobile-filter">
-        <div className="m-filter-btn">
-          <h3>Filter By</h3>
-          <Hamburger toggled={showFilters} toggle={handleBurgerClick} />
-        </div>
+      <div className="m-filter-btn">
+        <h3>Filter By</h3>
+        <Hamburger toggled={showFilters} toggle={handleBurgerClick} />
+      </div>
       <div className={`filters ${showFilters ? "active" : ""}`}>
-        <Filters />
+        <PriceFilter onPriceFilterChange={handlePriceFilterChange} />
+        <StyleFilter onStyleFilterChange={handleStyleFilterChange} />
+        <TypeFilter />
       </div>
     </BurgerFilter>
   );

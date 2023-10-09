@@ -171,7 +171,7 @@ function App() {
               sort: sortOption,
               facets: {
                 prices: priceFilter,
-                toiletStyle: styleFilter 
+                toiletStyle: styleFilter
               },
             }),
           }
@@ -192,7 +192,7 @@ function App() {
     <AppContainer>
       <LeftSection>
         <MobileFilterSection>
-          <MobileFilter />
+          <MobileFilter onPriceFilterChange={handlePriceFilterChange} onStyleFilterChange={handleStyleFilterChange}/>
           <Sort onSortChange={handleSortChange} />
         </MobileFilterSection>
         <div className="reg-filters">

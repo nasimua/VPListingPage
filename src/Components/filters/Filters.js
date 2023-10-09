@@ -27,7 +27,6 @@ function Filters({ onPriceFilterChange, onStyleFilterChange }) {
 
   return (
     <div>
-      {/* Pass gte, lte, setGte, and setLte to PriceFilter */}
       <PriceFilter onPriceFilterChange={handlePriceFilterChange} />
       <StyleFilter onStyleFilterChange={handleStyleFilterChange}/>
       <TypeFilter />
