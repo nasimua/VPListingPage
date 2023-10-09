@@ -9,8 +9,8 @@ function Filters({ onPriceFilterChange, onStyleFilterChange }) {
     console.log("Price filter changed:", low, high, isChecked);
     const filterObject = {
       value: {
-        gte: isChecked ? low : null,
-        lte: isChecked ? high : null,
+        gte: low,
+        lte: high,
       },
     };
 
@@ -19,7 +19,7 @@ function Filters({ onPriceFilterChange, onStyleFilterChange }) {
 
   const handleStyleFilterChange = (style, isChecked) => {
     const filterObject ={
-      value: isChecked ? style : ''
+      value: style
     }
 
     onStyleFilterChange(filterObject)

@@ -127,7 +127,7 @@ function App() {
       setPriceFilter([...priceFilter, filterObject]);
     }
 
-    console.log(priceFilter)
+    console.log(priceFilter, filterObject)
   };
 
   const handleStyleFilterChange = (filterObject) => {
@@ -178,7 +178,7 @@ function App() {
         );
 
         const data = await response.json();
-        console.log(data.products);
+        // console.log(data.products);
         setProducts(data.products);
       } catch (error) {
         console.error("Error fetching data:", error);

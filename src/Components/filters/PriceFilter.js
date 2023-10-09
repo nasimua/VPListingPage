@@ -4,7 +4,7 @@ import "./filters.css";
 function PriceFilter({onPriceFilterChange}) {
   
   const handleCheckboxChange = (low, high, isChecked) => {
-    onPriceFilterChange(low, high, isChecked)
+    onPriceFilterChange(low, high, isChecked) 
   }
 
   return (
