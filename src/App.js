@@ -73,7 +73,7 @@ function App() {
       setPriceFilter([...priceFilter, filterObject]);
     }
 
-    console.log(priceFilter, filterObject);
+    // console.log(priceFilter, filterObject);
   };
 
   const handleStyleFilterChange = (filterObject) => {
@@ -93,7 +93,7 @@ function App() {
       setStyleFilter([...styleFilter, filterObject]);
     }
 
-    console.log(styleFilter);
+    // console.log(styleFilter);
   };
 
   useEffect(() => {
@@ -130,6 +130,25 @@ function App() {
 
     fetchData();
   }, [sortOption, pageNum, priceFilter, styleFilter]);
+
+  useEffect(() => {
+    localStorage.setItem("priceFilter", JSON.stringify(priceFilter));
+    localStorage.setItem("styleFilter", JSON.stringify(styleFilter));
+  }, [priceFilter, styleFilter]);
+
+  useEffect(() => {
+    const savedPriceFilter = JSON.parse(localStorage.getItem('priceFilter'))
+    const savedStyleFilter = JSON.parse(localStorage.getItem('styleFilter'))
+
+    if (savedPriceFilter) {
+      setPriceFilter(savedPriceFilter)
+    }
+    if (savedStyleFilter) {
+      setStyleFilter(savedStyleFilter)
+    }
+  
+    console.log(savedPriceFilter)
+  }, [])
 
   return (
     <AppContainer>
