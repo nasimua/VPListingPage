@@ -33,7 +33,6 @@ function MobileFilter({ onPriceFilterChange, onStyleFilterChange }) {
   }, []);
 
   const handlePriceFilterChange = (low, high, isChecked) => {
-    console.log("Price filter changed:", low, high, isChecked);
     const filterObject = {
       value: {
         gte: low,

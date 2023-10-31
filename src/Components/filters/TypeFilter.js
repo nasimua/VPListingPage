@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 import "./filters.css";
 
 function TypeFilter() {
   return (
-    <div className='filter'>
+    <div className="filter">
       <h3>Type</h3>
       <label>
         <input type="checkbox" />
@@ -16,7 +16,7 @@ function TypeFilter() {
       </label>
       <br></br>
     </div>
-  )
+  );
 }
 
-export default TypeFilter
+export default TypeFilter;

@@ -4,9 +4,7 @@ import StyleFilter from "./StyleFilter";
 import TypeFilter from "./TypeFilter";
 
 function Filters({ onPriceFilterChange, onStyleFilterChange }) {
-
   const handlePriceFilterChange = (low, high, isChecked) => {
-    console.log("Price filter changed:", low, high, isChecked);
     const filterObject = {
       value: {
         gte: low,
@@ -18,17 +16,17 @@ function Filters({ onPriceFilterChange, onStyleFilterChange }) {
   };
 
   const handleStyleFilterChange = (style, isChecked) => {
-    const filterObject ={
-      value: style
-    }
+    const filterObject = {
+      value: style,
+    };
 
-    onStyleFilterChange(filterObject)
-  }
+    onStyleFilterChange(filterObject);
+  };
 
   return (
     <div>
       <PriceFilter onPriceFilterChange={handlePriceFilterChange} />
-      <StyleFilter onStyleFilterChange={handleStyleFilterChange}/>
+      <StyleFilter onStyleFilterChange={handleStyleFilterChange} />
       <TypeFilter />
     </div>
   );

@@ -2,7 +2,6 @@ import React from "react";
 import "./filters.css";
 
 function PriceFilter({ onPriceFilterChange }) {
-
   const handleCheckboxChange = (low, high, isChecked) => {
     onPriceFilterChange(low, high, isChecked);
   };

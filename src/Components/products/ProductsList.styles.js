@@ -24,9 +24,8 @@ export const ProdList = styled.div`
   }
 
   @media only screen and (max-width: 300px) {
-      display: grid;
-      grid-template-columns: 1fr;
-  
+    display: grid;
+    grid-template-columns: 1fr;
   }
 `;
 
@@ -36,14 +35,14 @@ export const Prod = styled.div`
   background-color: #fff;
 
   @media only screen and (max-width: 600px) {
-      width: 230px;
+    width: 230px;
   }
 
   @media only screen and (max-width: 450px) {
-      width: 10em;
+    width: 10em;
   }
 
   @media only screen and (max-width: 300px) {
-      width: 260px;
+    width: 260px;
   }
 `;

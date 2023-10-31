@@ -88,8 +88,6 @@ function App() {
     if (savedStyleFilter) {
       setStyleFilter(savedStyleFilter);
     }
-
-    console.log(savedPriceFilter);
   }, []);
 
   useEffect(() => {
