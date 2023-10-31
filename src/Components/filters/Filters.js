@@ -1,5 +1,5 @@
 import React from "react";
-import PriceFilter from "./PriceFilter"; // Import your PriceFilter component
+import PriceFilter from "./PriceFilter";
 import StyleFilter from "./StyleFilter";
 import TypeFilter from "./TypeFilter";
 

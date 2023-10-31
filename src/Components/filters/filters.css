@@ -2,9 +2,6 @@
   background-color: #fff;
   padding: 10px 10px;
 }
-/* .filter-by {
-  margin: 20px 5px;
-} */
 
 .reg-sort {
   margin: 10px 0;
@@ -23,21 +20,12 @@
   margin-bottom: 5px;
 }
 
-/* .mobile-filter {
-  display: none;
-} */
-
 @media only screen and (max-width: 750px) {
   .reg-filters,
   .reg-sort {
     display: none;
   }
 
-  /* .mobile-filter {
-    display: flex;
-  } */
-  
-  
   .m-filter-btn {
     display: flex;
     align-items: center;

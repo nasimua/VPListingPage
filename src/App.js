@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
-// import "./App.css";
-// import styled from "styled-components";
 import "./Components/filters/filters.css";
-// import data from "./example-payload.json";
 import ProductList from "./Components/products/ProductList";
 import Filters from "./Components/filters/Filters";
 import Sort from "./Components/filters/Sort";
@@ -17,11 +14,6 @@ import {
 } from "./App.styles";
 
 function App() {
-  // destructure products array from JSON data
-  // static data
-  // const { products } = data.item;
-
-  // fteching data from a POST endpoint API
   const [products, setProducts] = useState([]);
   const [sortOption, setSortOption] = useState(1);
   const [pageNum, setPageNum] = useState(1);
@@ -53,7 +45,6 @@ function App() {
   };
 
   const handlePriceFilterChange = (filterObject) => {
-    // Check if the filter object is already in the priceFilter array
     const isFilterInArray = priceFilter.some(
       (filter) =>
         filter.value.gte === filterObject.value.gte &&
@@ -61,7 +52,6 @@ function App() {
     );
 
     if (isFilterInArray) {
-      // If the object is already in the array, remove it
       const newPriceFilter = priceFilter.filter(
         (filter) =>
           filter.value.gte !== filterObject.value.gte ||
@@ -69,32 +59,43 @@ function App() {
       );
       setPriceFilter(newPriceFilter);
     } else {
-      // If the object is not in the array, add it
       setPriceFilter([...priceFilter, filterObject]);
     }
-
-    // console.log(priceFilter, filterObject);
   };
 
   const handleStyleFilterChange = (filterObject) => {
-    // Check if the filter object is already in the priceFilter array
     const isFilterInArray = styleFilter.some(
       (filter) => filter.value === filterObject.value
     );
 
     if (isFilterInArray) {
-      // If the object is already in the array, remove it
       const newStyleFilter = styleFilter.filter(
         (filter) => filter.value !== filterObject.value
       );
       setStyleFilter(newStyleFilter);
     } else {
-      // If the object is not in the array, add it
       setStyleFilter([...styleFilter, filterObject]);
     }
-
-    // console.log(styleFilter);
   };
+
+  useEffect(() => {
+    const savedPriceFilter = JSON.parse(localStorage.getItem("priceFilter"));
+    const savedStyleFilter = JSON.parse(localStorage.getItem("styleFilter"));
+
+    if (savedPriceFilter) {
+      setPriceFilter(savedPriceFilter);
+    }
+    if (savedStyleFilter) {
+      setStyleFilter(savedStyleFilter);
+    }
+
+    console.log(savedPriceFilter);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("priceFilter", JSON.stringify(priceFilter));
+    localStorage.setItem("styleFilter", JSON.stringify(styleFilter));
+  }, [priceFilter, styleFilter]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -121,7 +122,6 @@ function App() {
         );
 
         const data = await response.json();
-        // console.log(data.products);
         setProducts(data.products);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -130,25 +130,6 @@ function App() {
 
     fetchData();
   }, [sortOption, pageNum, priceFilter, styleFilter]);
-
-  useEffect(() => {
-    localStorage.setItem("priceFilter", JSON.stringify(priceFilter));
-    localStorage.setItem("styleFilter", JSON.stringify(styleFilter));
-  }, [priceFilter, styleFilter]);
-
-  useEffect(() => {
-    const savedPriceFilter = JSON.parse(localStorage.getItem('priceFilter'))
-    const savedStyleFilter = JSON.parse(localStorage.getItem('styleFilter'))
-
-    if (savedPriceFilter) {
-      setPriceFilter(savedPriceFilter)
-    }
-    if (savedStyleFilter) {
-      setStyleFilter(savedStyleFilter)
-    }
-  
-    console.log(savedPriceFilter)
-  }, [])
 
   return (
     <AppContainer>
@@ -176,7 +157,6 @@ function App() {
           <Sort onSortChange={handleSortChange} />
         </div>
 
-        {/* render ProductList Component, passing 'products' as prop */}
         <ProductList products={products} />
         <Pagination className="pagination">
           <PageButton
